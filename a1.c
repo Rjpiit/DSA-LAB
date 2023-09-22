@@ -10,14 +10,14 @@
  * Selections should be generated in lexicographic order.
  * a[0..k-1] is the smallest selection and a[n-k..n-1] is the largest.
  */
-void generate_selections_helper(int a[], int n, int b[], int k, int s, int i,void *data,void (*process_selection)(int *b, int k, void *data)) 
+void generate(int a[], int n, int b[], int k, int s, int i,void *data,void (*process_selection)(int *b, int k, void *data)) 
     {
         if (i == k) {
             process_selection(b,k,data);
         }
         for (int j = s; j < n; j++) {
             b[i] = a[j];
-            generate_selections_helper(a, n, b, k, j + 1, i + 1,data,process_selection);
+            generate(a, n, b, k, j + 1, i + 1,data,process_selection);
         }
     }
 void generate_selections(int a[], int n, int k, int b[], void *data, void (*process_selection)(int *b, int k, void *data))
@@ -34,7 +34,7 @@ void generate_selections(int a[], int n, int k, int b[], void *data, void (*proc
     // process_selection(b, 2, data);
     // b[0] = 6; b[1] = 5;
     // process_selection(b, 2, data);
-    generate_selections_helper(a, n, b, k, 0, 0, data,process_selection);
+    generate(a, n, b, k, 0, 0, data,process_selection);
 }
 
 /*
@@ -50,7 +50,7 @@ void generate_splits(const char *source, const char *dictionary[], int nwords, c
     strcpy(buf, "art is toil");
     process_split(buf, data);
     strcpy(buf, "artist oil");
-    process_split(buf, data);
+    process_split(buf, data); 
 }
 
 /*
