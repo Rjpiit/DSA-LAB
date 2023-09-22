@@ -57,14 +57,52 @@ void generate_splits(const char *source, const char *dictionary[], int nwords, c
  * Transform a[] so that it becomes the previous permutation of the elements in it.
  * If a[] is the first permutation, leave it unchanged.
  */
+void sorted_decreasing(int a[], int start, int end) {
+    while (start < end) {
+        int temp = a[start];
+        a[start] = a[end];
+        a[end] = temp;
+        start++;
+        end--;
+    }
+}
+
+int larger(int a[], int n) {
+    int i;
+    for (i = n - 2; i >= 0; i--) {
+        if (a[i] > a[i + 1]) {
+            return i;
+        }
+    }
+    return -1;
+}
+int Swap(int a[], int n, int start, int target) {
+    for (int i = n - 1; i >= start; i--) {
+        if (a[i] < target) {
+            return i;
+        }
+    }
+    return -1;
+}
 void previous_permutation(int a[], int n)
 {
-    a[0] = 1;
-    a[1] = 5;
-    a[2] = 4;
-    a[3] = 6;
-    a[4] = 3;
-    a[5] = 2;
+    // a[0] = 1;
+    // a[1] = 5;
+    // a[2] = 4;
+    // a[3] = 6;
+    // a[4] = 3;
+    // a[5] = 2;
+    int i = larger(a, n);
+
+    if (i == -1) {
+        return;
+    } else {
+        int j = Swap(a, n, i + 1, a[i]);
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+        sorted_decreasing(a, i + 1, n - 1);
+    }
 }
 
 /* Write your tests here. Use the previous assignment for reference. */
