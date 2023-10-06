@@ -12,16 +12,14 @@ enum {
 typedef char board_t[4][5];
 typedef char player_t;
 
-// int has_won(board_t board, player_t player) {
-//     // Add your code for checking victory here
-// }
-bool has_won(board_t board, player_t piece, int rows, int cols) {
+
+int has_won(board_t board, player_t piece, int rows, int cols) {
     // Vertical check
     for (int c = 0; c < cols; c++) {
         for (int r = 0; r < rows - 3; r++) {
             if (board[r][c] == piece && board[r + 1][c] == piece &&
                 board[r + 2][c] == piece && board[r + 3][c] == piece) {
-                return true;
+                return 1;
             }
         }
     }
@@ -31,7 +29,7 @@ bool has_won(board_t board, player_t piece, int rows, int cols) {
         for (int r = 0; r < rows; r++) {
             if (board[r][c] == piece && board[r][c + 1] == piece &&
                 board[r][c + 2] == piece && board[r][c + 3] == piece) {
-                return true;
+                return 1;
             }
         }
     }
@@ -41,7 +39,7 @@ bool has_won(board_t board, player_t piece, int rows, int cols) {
         for (int r = 0; r < rows - 3; r++) {
             if (board[r][c] == piece && board[r + 1][c + 1] == piece &&
                 board[r + 2][c + 2] == piece && board[r + 3][c + 3] == piece) {
-                return true;
+                return 1;
             }
         }
     }
@@ -51,27 +49,27 @@ bool has_won(board_t board, player_t piece, int rows, int cols) {
         for (int r = 3; r < rows; r++) {
             if (board[r][c] == piece && board[r - 1][c + 1] == piece &&
                 board[r - 2][c + 2] == piece && board[r - 3][c + 3] == piece) {
-                return true;
+                return 1;
             }
         }
     }
 
-    return false;
+    return 0;
 }
 
 
 bool is_full(board_t board, int selection, int rows, int cols) {
     // Check if the selected column is within the valid range
     if (selection < 0 || selection >= cols) {
-        return false;
+        return 0;
     }
 
     // Check if the bottom row in the selected column is empty (0)
     if (board[rows - 1][selection] == EMPTY) {
-        return true;
+        return 1;
     }
 
-    return false;
+    return 0;
 }
 void drop_piece(board_t board, int row, int selection, player_t piece) {
     // Place the piece in the specified row and column
@@ -102,7 +100,7 @@ move_t best_move(board_t board, player_t piece, int rows, int cols) {
                 drop_piece(board_copy, row, c, piece);
 
                 // Check if making this move would lead to a win
-                if (has_won(board_copy, piece, rows, cols)) {
+                if (has_won(board_copy, piece, rows, cols)==1) {
                     best_move.col = c;
                     return best_move;
                 }
@@ -172,7 +170,7 @@ int main() {
 
     while (!game_over) {
         // Player 1
-        printf("%d\n", count);
+        printf("\n");
         if (count > rows * cols) {
             printf("Game Drawn\n");
             game_over = true;
@@ -185,7 +183,7 @@ int main() {
             count++;
 
             // Check if the selected position is valid
-            if (is_full(board, selection, rows, cols)) {
+            if (is_full(board, selection, rows, cols)==1) {
                 // Find the next available row for the piece
                 int row;
                 for (row = 0; row < rows; row++) {
@@ -196,7 +194,7 @@ int main() {
                 board[row][selection] = player_color; // Set the user's chosen color
 
                 // Check for victory
-                if (has_won(board, player_color, rows, cols)) {
+                if (has_won(board, player_color, rows, cols)==1) {
                     printf("Player 1 wins!!!\n");
                     game_over = true;
                 }
@@ -205,10 +203,10 @@ int main() {
                 printf("Invalid move !!!! Player 1, please select (0-%d): ", cols - 1);
                 scanf("%d", &selection);
                 count++;
-                if (is_full(board, selection, rows, cols)) {
+                if (is_full(board, selection, rows, cols)==1) {
                 int row = get_next_available_row(board, selection, rows, cols);
                 drop_piece(board, row, selection, player_color); 
-                if (has_won(board, player_color, rows, cols)) {
+                if (has_won(board, player_color, rows, cols)==1) {
                     printf("Player1 wins!!!\n");
                     game_over = true;
                 }
@@ -226,10 +224,10 @@ int main() {
                 count++;
             }
 
-            if (is_full(board, selection, rows, cols)) {
+            if (is_full(board, selection, rows, cols)==1) {
                 int row = get_next_available_row(board, selection, rows, cols);
                 drop_piece(board, row, selection, 3 - player_color); // The computer's color is the opposite of the user's color (3 - player_color)
-                if (has_won(board, 3 - player_color, rows, cols)) {
+                if (has_won(board, 3 - player_color, rows, cols)==1) {
                     printf("Computer wins!!!\n");
                     game_over = true;
                 }
