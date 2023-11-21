@@ -150,10 +150,10 @@ int main() {
             std::cout << "Computer played this move : " << response.line << "\n";
         }
 
-        if (has_won(board, current)) {
-            print_board(board);
-            std::cout << "\x1b[34 ;1m Hurray!!! Player " << ((current == RED) ? 'R' : 'B') << " has won!\x1b[0m \n";
-            break;
+        if (has_won(board, other_player(current))) {
+        print_board(board);
+        std::cout << "\x1b[34 ;1m Hurray!!! Player " << ((current == RED) ? 'R' : 'B') << " has won!\x1b[0m \n";
+        break;
         }
 
         current = other_player(current);
