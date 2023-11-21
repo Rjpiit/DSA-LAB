@@ -3,7 +3,8 @@
 #include <array>
 #include <algorithm>
 #include <tuple>
-#include "queue.hpp"
+#include <queue>
+#include <cassert>
 
 // 0(empty space); 1(top face); 2(bottom face); 3(left face); 4(right face); 5(front face); 6(back face)
 
@@ -126,7 +127,6 @@ board right(const board& b)
     return o; 
 }
 
-
 bool is_same(const board& a, const board &b)
 {
     for (int r = 0; r < 3; ++r)
@@ -156,15 +156,17 @@ int ord(const board& board)
 #define max_s (40353608)
 std::vector<int> solve(const board& src, const board& config)
 {
-    queue<board, max_s> q;
-    int visited[max_s];
-    board parent[max_s];
+    std::queue<board> q;
+    std::vector<int> visited(max_s, 0);
+    std::vector<board> parent(max_s);
 
-    enqueue(q, src);
+    q.push(src);
     visited[ord(src)] = L;
 
-    while (!is_empty(q)) {
-        board u = dequeue(q);
+    while (!q.empty()) {
+        board u = q.front();
+        q.pop();
+
         if (is_same(u, config)) {
             std::vector<int> moves;
             board c = u;
@@ -191,27 +193,26 @@ std::vector<int> solve(const board& src, const board& config)
         if (!visited[aord]) {
             visited[aord] = U;
             parent[aord] = u;
-            enqueue(q, a);
+            q.push(a);
         }
         if (!visited[bord]) {
             visited[bord] = D;
             parent[bord] = u;
-            enqueue(q, b);
+            q.push(b);
         }
         if (!visited[cord]) {
             visited[cord] = L;
             parent[cord] = u;
-            enqueue(q, c);
+            q.push(c);
         }
         if (!visited[dord]) {
             visited[dord] = R;
             parent[dord] = u;
-            enqueue(q, d);
+            q.push(d);
         }
     }
-    printf("Cannot be solved");
+    printf("Cannot be solved\n");
     return std::vector<int>();
-    assert(0);
 }
 
 void print_moves(const std::vector<int>& moves)
@@ -230,7 +231,7 @@ void print_moves(const std::vector<int>& moves)
 int main()
 {
     board src, config;
-    printf("0(empty space); 1(top face); 2(bottom face); 3(left face); 4(right face); 5(front face); 6(back face)");
+    printf("0(empty space); 1(top face); 2(bottom face); 3(left face); 4(right face); 5(front face); 6(back face)\n");
     printf("Enter your existing board : \n");
     read_board(src);
     printf("Enter your targeted board : \n");
