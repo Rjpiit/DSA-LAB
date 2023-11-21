@@ -8,13 +8,6 @@ yrgb  //(new line)
 bgow  //(new line)
 royr //(new line)
 
-desired input
-rrrr   //(enter next input in new line)
-bbbb   //(new line)
-wwww   //(new line)
-yyyy   //(new line)
-oooo   //(new line)
-gggg   //(new line)
 
 // 'r' (red)
 // 'o' (orange)
