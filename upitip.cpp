@@ -123,7 +123,7 @@ board right(const board& b)
         o.e[r][c]=o.e[r][c+1];
     }
     o.e[r][c+1]=0;
-    return o;
+    return o; 
 }
 
 
