@@ -1,20 +1,20 @@
 Example 
 initial input
 
-rbog (new line)
-ybwr
-oowb
-yrgb
-bgow
-royr
+rbog //(enter next input in new line)
+ybwr  //(new line)
+oowb  //(new line)
+yrgb  //(new line)
+bgow  //(new line)
+royr //(new line)
 
 desired input
-rrrr
-bbbb
-wwww
-yyyy
-oooo
-gggg
+rrrr   //(enter next input in new line)
+bbbb   //(new line)
+wwww   //(new line)
+yyyy   //(new line)
+oooo   //(new line)
+gggg   //(new line)
 
 // 'r' (red)
 // 'o' (orange)
