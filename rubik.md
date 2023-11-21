@@ -1,6 +1,7 @@
 Example 
 initial input
-rbog
+
+rbog (new line)
 ybwr
 oowb
 yrgb
