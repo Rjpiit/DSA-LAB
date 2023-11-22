@@ -1,18 +1,18 @@
 Example 
 initial input
 
-rbog //(enter next input in new line)
-ybwr  //(new line)
-oowb  //(new line)
-yrgb  //(new line)
-bgow  //(new line)
-royr //(new line)
+RR
+RR
+WW
+WW
+GG
+GG
+OO
+OO
+YY
+YY
+BB
+BB
 
 
-// 'r' (red)
-// 'o' (orange)
-// 'w' (white)
-// 'y' (yellow)
-// 'b' (blue)
-// 'g' (green)
 
