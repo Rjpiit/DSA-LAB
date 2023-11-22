@@ -1,18 +1,18 @@
 Example 
 initial input
 
-RR
-RR
-WW
-WW
-GG
-GG
-OO
-OO
-YY
-YY
-BB
-BB
+RR\n
+RR\n
+WW\n
+WW\n
+GG\n
+GG\n
+OO\n
+OO\n
+YY\n
+YY\n
+BB\n
+BB\n
 
 
 
